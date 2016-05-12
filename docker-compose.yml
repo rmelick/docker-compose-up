@@ -4,6 +4,8 @@ services:
     image: rmelick/docker-compose-up-app-container:latest
     hostname: app
     container_name: app
+    ports:
+     - "10080:10080"
     volumes_from:
       - appConfig:ro
     environment:
