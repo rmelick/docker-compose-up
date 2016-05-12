@@ -1,0 +1,25 @@
+version: '2'
+services:
+  app:
+    image: rmelick/docker-compose-up-app-container:latest
+    hostname: app
+    container_name: app
+    volumes_from:
+      - appConfig:ro
+    environment:
+      - "constraint:node==docker-compose-up-node"
+    networks:
+      - docker-compose-up-network
+  appConfig:
+    image: rmelick/docker-compose-up-data-container:latest
+    environment:
+      - "constraint:node==docker-compose-up-node"
+    networks:
+      - docker-compose-up-network
+networks:
+  docker-compose-up-network:
+    driver: overlay
+    ipam:
+      driver: default
+      config:
+        - subnet: 11.0.0.0/16
